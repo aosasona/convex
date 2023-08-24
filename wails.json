@@ -1,0 +1,13 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "convex",
+  "assetdir": "./frontend/dist",
+  "outputfilename": "convex",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "wailsjsdir": "./frontend/src",
+  "author": {
+    "name": "Ayodeji O",
+    "email": "97124713+aosasona@users.noreply.github.com"
+  }
+}
