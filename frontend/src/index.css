@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	@apply text-white select-none;
+html {
+	@apply h-full text-white select-none overflow-hidden;
 }
 
 .draggable {
@@ -12,4 +12,34 @@ body {
 
 .not-draggable {
 	--wails-draggable: no-drag;
+}
+
+.scrollarea {
+	max-width: 100%;
+	height: 100%;
+	overflow-y: auto !important;
+}
+
+.scrollarea::-webkit-scrollbar {
+	width: 0.65rem;
+}
+
+.scrollarea::-webkit-scrollbar-track {
+	@apply bg-convex-900;
+}
+
+.scrollarea::-webkit-scrollbar-thumb {
+	@apply bg-convex-700 rounded-lg;
+}
+
+.scrollarea::-webkit-scrollbar-thumb:hover {
+	@apply bg-convex-950;
+}
+
+.scrollarea::-webkit-scrollbar-thumb:active {
+	@apply bg-convex-950;
+}
+
+.scrollarea::-webkit-scrollbar-thumb:window-inactive {
+	@apply bg-convex-950;
 }
