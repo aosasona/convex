@@ -1,10 +1,12 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "convex",
+  "name": "Convex",
   "assetdir": "./frontend/dist",
-  "outputfilename": "convex",
-  "frontend:install": "npm install",
-  "frontend:build": "npm run build",
+  "outputfilename": "Convex",
+  "frontend:install": "yarn",
+  "frontend:build": "yarn build",
+  "frontend:dev:watcher": "yarn start",
+  "frontend:dev:serverUrl": "http://localhost:3800",
   "wailsjsdir": "./frontend/src",
   "author": {
     "name": "Ayodeji O",

@@ -1,4 +1,4 @@
-module changeme
+module convex
 
 go 1.18
 

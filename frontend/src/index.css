@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	@apply text-white select-none;
+}
+
+.draggable {
+	--wails-draggable: drag;
+}
+
+.not-draggable {
+	--wails-draggable: no-drag;
+}
