@@ -24,6 +24,8 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/components"),
       "@ui": path.resolve(__dirname, "./src/components/ui/index.ts"),
       "@layouts": path.resolve(__dirname, "./src/layouts"),
+      "@context": path.resolve(__dirname, "./src/context"),
+      "@stores": path.resolve(__dirname, "./src/stores"),
       "@wails": path.resolve(__dirname, "./src/wailsjs/go"),
       "@wails-runtime": path.resolve(__dirname, "./src/wailsjs/runtime"),
     },

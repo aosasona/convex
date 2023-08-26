@@ -8,16 +8,36 @@
 		"esModuleInterop": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"types": ["vite/client"],
+		"types": [
+			"vite/client"
+		],
 		"noEmit": true,
 		"isolatedModules": true,
 		"paths": {
-			"@convex/*": ["./src/*"],
-			"@ui": ["./src/components/ui/index.ts"],
-			"@components/*": ["./src/components/*"],
-			"@layouts/*": ["./src/layouts/*"],
-			"@wails/*": ["./src/wailsjs/go/*"],
-			"@wails-runtime/*": ["./src/wailsjs/runtime/*"]
+			"@convex/*": [
+				"./src/*"
+			],
+			"@ui": [
+				"./src/components/ui/index.ts"
+			],
+			"@components/*": [
+				"./src/components/*"
+			],
+			"@context/*": [
+				"./src/context/*"
+			],
+			"@stores/*": [
+				"./src/stores/*"
+			],
+			"@layouts/*": [
+				"./src/layouts/*"
+			],
+			"@wails/*": [
+				"./src/wailsjs/go/*"
+			],
+			"@wails-runtime/*": [
+				"./src/wailsjs/runtime/*"
+			]
 		}
 	}
 }

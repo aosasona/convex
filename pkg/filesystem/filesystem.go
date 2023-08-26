@@ -40,20 +40,6 @@ func (fs *Filesystem) SetRoot(root string) {
 }
 
 func (fs *Filesystem) GetRoot() FilePath {
-	if fs.root == "~" {
-		user, err := user.Current()
-		if err != nil {
-			log.Fatalf("Failed to get current user: %s", err)
-		}
-
-		name := user.Username
-		if name == "" {
-			name = user.Name
-		}
-
-		return FilePath{Name: name, Path: user.HomeDir}
-	}
-
 	var name string
 	for i := len(fs.root) - 1; i >= 0; i-- {
 		if fs.root[i] == '/' {
@@ -61,6 +47,15 @@ func (fs *Filesystem) GetRoot() FilePath {
 			break
 		}
 	}
+
+	if name == "" {
+		user, err := user.Current()
+		if err != nil {
+			log.Fatalf("Failed to get current user: %s", err)
+		}
+		name = user.Username
+	}
+
 	return FilePath{Name: name, Path: fs.root}
 }
 

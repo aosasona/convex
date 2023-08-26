@@ -2,13 +2,11 @@
 import { render } from "solid-js/web";
 
 import "./index.css";
-import { Route, Router, Routes } from "@solidjs/router";
-import { lazy } from "solid-js";
 import AppLayout from "./layouts/app-layout";
+import Root from "./root";
+import { AppProvider } from "./context/app";
 
 const root = document.getElementById("root");
-
-const Explorer = lazy(() => import("./pages/explorer"));
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   throw new Error("Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got misspelled?");
@@ -16,13 +14,11 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(
   () => (
-    <AppLayout>
-      <Router>
-        <Routes>
-          <Route path="/" component={Explorer} />
-        </Routes>
-      </Router>
-    </AppLayout>
+    <AppProvider>
+      <AppLayout>
+        <Root />
+      </AppLayout>
+    </AppProvider>
   ),
   root!
 );

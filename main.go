@@ -1,6 +1,7 @@
 package main
 
 import (
+	"convex/internal/platform"
 	"convex/pkg/filesystem"
 	"embed"
 	"log"
@@ -35,7 +36,7 @@ func main() {
 		Frameless:         false,
 		StartHidden:       false,
 		HideWindowOnClose: true,
-		BackgroundColour:  &options.RGBA{R: 180, G: 180, B: 180, A: 180},
+		BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
 		AlwaysOnTop:       false,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
@@ -53,15 +54,17 @@ func main() {
 			filesystem.FS,
 			&filesystem.Entry{},
 			&filesystem.FilePath{},
+			&platform.Platform{},
 		},
 		// Windows platform specific options
 		Windows: &windows.Options{
-			WebviewIsTransparent: true,
-			WindowIsTranslucent:  true,
-			DisableWindowIcon:    true,
-			// DisableFramelessWindowDecorations: false,
-			WebviewUserDataPath: "",
-			ZoomFactor:          1.0,
+			WebviewIsTransparent:              true,
+			WindowIsTranslucent:               true,
+			DisableWindowIcon:                 true,
+			DisableFramelessWindowDecorations: true,
+			WebviewUserDataPath:               "",
+			ZoomFactor:                        1.0,
+			Theme:                             windows.Dark,
 		},
 		// Mac platform specific options
 		Mac: &mac.Options{
