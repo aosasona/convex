@@ -4,17 +4,21 @@ import (
 	"log"
 	"os"
 	"os/user"
+	"strings"
 )
 
 type Entry struct {
-	Name string `json:"name"`
+	Name           string `json:"name"`
+	Path           string `json:"path"`
+	Ext            string `json:"ext"`
+	IsDir          bool   `json:"isDir"`
+	Size           int64  `json:"size"`
+	LastModifiedAt int64  `json:"lastModifiedAt"`
 }
 
 type FilePath struct {
-	Name     string     `json:"name"`
-	Path     string     `json:"path"`
-	Children []FilePath `json:"children"`
-	Parents  []FilePath `json:"parents"`
+	Name string `json:"name"`
+	Path string `json:"path"`
 }
 
 type Filesystem struct {
@@ -24,7 +28,11 @@ type Filesystem struct {
 var FS = &Filesystem{}
 
 func init() {
-	FS.SetRoot("~")
+	homedir, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatalf("Failed to get home directory: %s", err)
+	}
+	FS.SetRoot(homedir)
 }
 
 func (fs *Filesystem) SetRoot(root string) {
@@ -56,18 +64,36 @@ func (fs *Filesystem) GetRoot() FilePath {
 	return FilePath{Name: name, Path: fs.root}
 }
 
-func (fs *Filesystem) GetAll(root string) []Entry {
-	if root == "" {
-		root = "~"
-	}
-	files, err := os.ReadDir(root)
+// TODO: better error handling
+func (fs *Filesystem) GetAllEntriesInCurrentRoot() []Entry {
+	files, err := os.ReadDir(fs.root)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	var entries []Entry
 	for _, file := range files {
-		entries = append(entries, Entry{file.Name()})
+		info, err := file.Info()
+		if err != nil {
+			continue
+		}
+
+		var ext string
+		if !info.IsDir() {
+			parts := strings.Split(info.Name(), ".")
+			if len(parts) > 1 {
+				ext = parts[len(parts)-1]
+			}
+		}
+
+		entries = append(entries, Entry{
+			Name:           info.Name(),
+			Path:           fs.root + "/" + info.Name(),
+			Ext:            ext,
+			IsDir:          file.IsDir(),
+			LastModifiedAt: info.ModTime().Unix(),
+			Size:           info.Size(),
+		})
 	}
 
 	return entries

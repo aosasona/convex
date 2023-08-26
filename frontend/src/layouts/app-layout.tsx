@@ -10,7 +10,7 @@ export default function AppLayout(props: ParentProps) {
   }
 
   return (
-    <main class="flex transition-all">
+    <main class="flex">
       <Sidebar showSidebar={showSidebar} />
       <div class="relative w-full h-screen bg-background">
         <Topbar showSidebar={showSidebar} toggleSidebar={toggleSidebar} />

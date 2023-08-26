@@ -16,7 +16,7 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
-//go:embed build/appicon.png
+//go:embed appicon.png
 var icon []byte
 
 func main() {
@@ -26,18 +26,17 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:             "Convex",
-		Width:             968,
-		Height:            600,
-		MinWidth:          968,
-		MinHeight:         600,
+		Width:             1024,
+		Height:            652,
 		MaxWidth:          1280,
-		MaxHeight:         800,
-		DisableResize:     false,
+		MaxHeight:         968,
+		DisableResize:     true,
 		Fullscreen:        false,
 		Frameless:         false,
 		StartHidden:       false,
 		HideWindowOnClose: true,
-		BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
+		BackgroundColour:  &options.RGBA{R: 180, G: 180, B: 180, A: 180},
+		AlwaysOnTop:       false,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
@@ -66,20 +65,13 @@ func main() {
 		},
 		// Mac platform specific options
 		Mac: &mac.Options{
-			TitleBar: &mac.TitleBar{
-				TitlebarAppearsTransparent: true,
-				HideTitle:                  true,
-				HideTitleBar:               false,
-				FullSizeContent:            true,
-				UseToolbar:                 false,
-				HideToolbarSeparator:       true,
-			},
+			TitleBar:             mac.TitleBarHiddenInset(),
 			Appearance:           mac.NSAppearanceNameDarkAqua,
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
 			About: &mac.AboutInfo{
 				Title:   "Convex",
-				Message: "A minimal file explorer; sane search for Windows, at last!",
+				Message: "A minimal file explorer",
 				Icon:    icon,
 			},
 		},

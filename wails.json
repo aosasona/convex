@@ -11,5 +11,11 @@
   "author": {
     "name": "Ayodeji O",
     "email": "97124713+aosasona@users.noreply.github.com"
+  },
+  "info": {
+    "companyName": "WyteSpace",
+    "productName": "Convex",
+    "productVersion": "1.0.0",
+    "copyright": "Ayodeji Osasona"
   }
 }
