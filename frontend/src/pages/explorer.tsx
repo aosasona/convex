@@ -1,39 +1,38 @@
 import { GetAllEntriesInCurrentRoot } from "@convex/wailsjs/go/filesystem/Filesystem";
-import { Button, Label } from "@ui";
-import { Show, createResource } from "solid-js";
+import { For, Show, createResource } from "solid-js";
+import { IoFolder } from "solid-icons/io";
+import { TbFile } from "solid-icons/tb";
 
 export default function Explorer() {
-  // const [entries] = createResource(() => GetAllEntriesInCurrentRoot());
+	const [entries] = createResource(() => GetAllEntriesInCurrentRoot());
 
-  return (
-    <div class="px-4">
-      <div class="mt-4">
-        <Label class="mb-1.5">Active</Label>
-        <div class="flex gap-4 items-center">
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="danger">Danger</Button>
-        </div>
-      </div>
-
-      <div class="mt-4">
-        <Label class="mb-1.5">Disabled</Label>
-        <div class="flex gap-4 items-center">
-          <Button variant="primary" disabled>
-            Primary
-          </Button>
-          <Button variant="secondary" disabled>
-            Secondary
-          </Button>
-          <Button variant="ghost" disabled>
-            Ghost
-          </Button>
-          <Button variant="danger" disabled>
-            Danger
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div class="px-4">
+			<Show when={entries.loading}>
+				<p>Loading...</p>
+			</Show>
+			<Show when={entries.error}>
+				<p>Error: {entries.error.message}</p>
+			</Show>
+			<Show when={entries()}>
+				<div class="grid grid-cols-4">
+					<For each={entries()}>
+						{(entry) =>
+							entry.isDir ? (
+								<div>
+									<IoFolder class="w-14 h-14 text-blue-500" />
+									<p class="w-3/5 text-ellipsis">{entry.name}</p>
+								</div>
+							) : (
+								<div>
+									<TbFile class="w-14 h-14 text-blue-500" />
+									<p class="w-3/5 text-ellipsis">{entry.name}</p>
+								</div>
+							)
+						}
+					</For>
+				</div>
+			</Show>
+		</div>
+	);
 }

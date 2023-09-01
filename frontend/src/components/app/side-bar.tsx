@@ -1,39 +1,27 @@
-import { Accessor, Show } from "solid-js";
-import { Motion, Presence } from "@motionone/solid";
+import { useStore } from "@nanostores/solid";
 import { Label } from "../ui";
-import { useApp } from "@context/app";
+import { $platform } from "@stores/platform";
 
-type SidebarProps = {
-  showSidebar: Accessor<boolean>;
-};
+export default function Sidebar() {
+	const platform = useStore($platform);
 
-export default function Sidebar({ showSidebar }: SidebarProps) {
-  const { config } = useApp();
+	return (
+		<div
+			class="px-3 space-y-3 w-1/4 border-r backdrop-blur-2xl border-r-accent"
+			classList={{
+				"pt-12": platform() == "darwin",
+				"bg-background/50": platform() == "darwin",
+				"bg-background": platform() !== "darwin",
+			}}>
+			<div>
+				<Label>Favourites</Label>
+				<div class="flex flex-col w-full"></div>
+			</div>
 
-  return (
-    <Presence exitBeforeEnter>
-      <Show when={showSidebar()}>
-        <Motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "25%" }}
-          exit={{ width: 0 }}
-          class="px-3 space-y-3 border-r backdrop-blur-2xl border-r-accent"
-          classList={{
-            "pt-12": config().platform === "darwin",
-            "bg-background/60": config().platform === "darwin",
-            "bg-background": config().platform !== "darwin",
-          }}>
-          <div>
-            <Label>Favourites</Label>
-            <div class="flex flex-col w-full"></div>
-          </div>
-
-          <div>
-            <Label>Pinned</Label>
-            <div class="flex flex-col w-full"></div>
-          </div>
-        </Motion.div>
-      </Show>
-    </Presence>
-  );
+			<div>
+				<Label>Pinned</Label>
+				<div class="flex flex-col w-full"></div>
+			</div>
+		</div>
+	);
 }

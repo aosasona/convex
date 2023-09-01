@@ -21,6 +21,7 @@ html {
 	max-width: 100%;
 	height: 100%;
 	overflow-y: auto !important;
+	overflow-x: hidden !important;
 }
 
 .scrollarea::-webkit-scrollbar {
