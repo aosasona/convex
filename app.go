@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"convex/internal/menus"
 )
 
 // App struct
@@ -18,6 +19,9 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	// Perform your setup here
 	a.ctx = ctx
+
+	// Setup the application menus
+	menus.SetContext(ctx)
 }
 
 // domReady is called after front-end resources have been loaded

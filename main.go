@@ -1,6 +1,7 @@
 package main
 
 import (
+	"convex/internal/menus"
 	"convex/internal/platform"
 	"convex/pkg/filesystem"
 	"embed"
@@ -41,7 +42,7 @@ func main() {
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		Menu:             nil,
+		Menu:             menus.AppMenu,
 		Logger:           nil,
 		LogLevel:         logger.DEBUG,
 		OnStartup:        app.startup,
