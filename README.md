@@ -1,19 +1,7 @@
-# Sott
+# Tauri + React + Typescript
 
-Sott is a [wails](https://wails.io) template including SolidJS, TailwindCSS and Typescript.
+This template should help get you started developing with Tauri, React and Typescript in Vite.
 
-## Using template
+## Recommended IDE Setup
 
-```bash
-wails init -n my-project -t https://github.com/aosasona/sott
-```
-
-## Live Development
-
-To run in live development mode, run `wails dev` in the project directory. In another terminal, go into the `frontend`
-directory and run `npm run dev`. The frontend dev server will run on http://localhost:34115. Connect to this in your
-browser and connect to your application.
-
-## Building
-
-To build a redistributable, production mode package, use `wails build`.
+- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
